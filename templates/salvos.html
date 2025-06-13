@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Estuda Ai</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/static/index.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/salvos.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -52,35 +52,14 @@
 
 
     <main>
-        <div class="nav-reels">
-            <div class="navegacao-reels">
-                <p class="texto-nav">Todos</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Matemática</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Ciências</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Idiomas</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">História</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Tecnologia</p>
-            </div>
-        </div>
+        <h2 class="h2-salvos">Seus Favoritos</h2>
+        <p class="p-salvos">0 vídeos salvos</p>
         <div class="video-card">
             <div class="video-thumb">
                 <video controls width="100%">
                     <source src="/videos/Download.mp4" type="video/mp4">
                      Seu navegador não suporta o vídeo.
                 </video>
-                <div class="controles-video">
-                    <button class="playPause"><i class="fas fa-play"></i></button>
-                </div>
                 <span class="tempo-video">1:30</span>
             </div>
             <div class="info-video">
@@ -91,6 +70,13 @@
                     <p class="vizu-video">12.5k visualizações</p>
                 </div>
             </div>
+        </div>
+        <div class="sem-video">
+          <div class="circle-sem-video">
+            <i class="fa far fa-bookmark icons-fav"></i>
+          </div>
+          <p class="p-sem-video">Nenhum vídeo encontrado</p>
+          <p>Tente ajustar os filtros de busca ou categoria.</p>
         </div>
 
     </main>
