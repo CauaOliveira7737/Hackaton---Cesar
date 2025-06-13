@@ -9,35 +9,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    
     <header>
         <div class="topo">
             <h1 class="texto-p">Estuda Ai</h1>
+            <div class="barra-pesquisa">
+                <i class="fas fa-search procurar-topo"></i>
+                <input class="input-topo" type="text" placeholder="Buscar vídeos educativos...">
+            </div>
             <div class="nav-topo">
                 <i class="fas fa-bars icon-menu"></i>
             </div>
         </div>
     </header>
+    <div class="overlay" id="overlay"></div>
+
+<div class="menu-lateral" id="menuLateral">
+    <span class="fechar-menu" id="fecharMenu">&times;</span>
+    <ul>
+        <div class="icons-menu">
+            <li><a href="/templates/index.html">Início</a></li>
+            <i class="fa fa-home icons_"></i>
+        </div>
+        <div class="icons-menu">
+            <li><a href="/templates/index.html">Calendário</a></li>
+            <i class="fa fa-calendar icons_"></i>
+        </div>
+        <div class="icons-menu">
+            <li><a href="/templates/index.html">Salvos</a></li>
+            <i class="fa fa-bookmark icons_"></i>
+        </div>
+        <div class="icons-menu">
+            <li><a href="/templates/index.html">Perfil</a></li>
+            <i class="fa fa-user icons_"></i>
+        </div>
+        <div class="icons-menu">
+            <li><a href="/templates/index.html">Sair</a></li>
+            <i class="fa fa-chevron-left icons_"></i>
+        </div>
+    </ul>
+</div>
+
+
     <main>
         <div class="nav-reels">
             <div class="navegacao-reels">
-                <p>Todos</p>
+                <p class="texto-nav">Todos</p>
             </div>
             <div class="navegacao-reels">
-                <p>Matemática</p>
+                <p class="texto-nav">Matemática</p>
             </div>
             <div class="navegacao-reels">
-                <p>Ciências</p>
+                <p class="texto-nav">Ciências</p>
             </div>
             <div class="navegacao-reels">
-                <p>Idiomas</p>
+                <p class="texto-nav">Idiomas</p>
             </div>
             <div class="navegacao-reels">
-                <p>História</p>
+                <p class="texto-nav">História</p>
             </div>
             <div class="navegacao-reels">
-                <p>Tecnologia</p>
+                <p class="texto-nav">Tecnologia</p>
             </div>
         </div>
+        <div class="video-card">
+            <div class="video-thumb">
+                <video controls width="100%">
+                    <source src="/videos/Download.mp4" type="video/mp4">
+                     Seu navegador não suporta o vídeo.
+                </video>
+                <span class="tempo-video">1:30</span>
+            </div>
+            <div class="info-video">
+                <p class="titulo-video">Equações do 2º Grau Simplificadas</p>
+                <p class="descricao-video">Aprenda a resolver equações de forma rápida e eficiente</p>
+                <div class="autor-vizu">
+                    <p class="autor-video">Prof. Ana Silva</p>
+                    <p class="vizu-video">12.5k visualizações</p>
+                </div>
+            </div>
+        </div>
+
     </main>
+    <script src='/js/script.js'></script>
 </body>
 </html>
