@@ -26,9 +26,9 @@
 
 <div class="menu-lateral" id="menuLateral">
     <span class="fechar-menu" id="fecharMenu">&times;</span>
-    <ul>
+    <ul class="icons-cards">
         <div class="icons-menu">
-            <li><a href="/templates/index.html">Início</a></li>
+            <li><a class="nome-menu" href="/templates/index.html">Início</a></li>
             <i class="fa fa-home icons_"></i>
         </div>
         <div class="icons-menu">
@@ -60,7 +60,14 @@
                     <source src="/videos/Download.mp4" type="video/mp4">
                      Seu navegador não suporta o vídeo.
                 </video>
+                <div class="controles-video">
+                    <button class="playPause"><i class="fas fa-play"></i></button>
+                </div>
                 <span class="tempo-video">1:30</span>
+                <div class="favoritar-video">
+                    <i class="fa far fa-bookmark"></i>
+                </div>
+
             </div>
             <div class="info-video">
                 <p class="titulo-video">Equações do 2º Grau Simplificadas</p>
@@ -80,6 +87,7 @@
         </div>
 
     </main>
-    <script src='/js/script.js'></script>
+    <script src='/static/js/script.js'></script>
+
 </body>
 </html>
