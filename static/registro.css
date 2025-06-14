@@ -1,0 +1,176 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.tela {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.demonstrar {
+    background: linear-gradient(135deg, #0047AB, #007BFF);
+    color: white;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-right: -40px;
+    padding-right: 60px;
+}
+
+.demonstrar img {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: -120px;
+}
+
+.demonstrar h2 {
+    font-size: 38px;
+    margin: 0;
+    font-weight: 700;
+    margin-bottom: -20px;
+}
+.demonstrar p{
+    font-weight: 360;
+}
+.container {
+    background-color: white;
+    padding: 30px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.397);
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 45px;
+    z-index: 1;
+    
+}
+
+.container h1 {
+    margin-bottom: 20px;
+    color: #333;
+    width: 65%;
+}
+form {
+    width: 65%
+}
+.form-group {
+    margin-bottom: 15px;
+    width: 80%;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 45px;
+    
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border: 1px solid #0047AB;
+    outline: none;
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0047AB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    height: 45px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #013d91;
+}
+
+.texto-login {
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.texto-login a {
+    color: #0047AB;
+    text-decoration: none;
+}
+
+.texto-login a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .tela {
+        flex-direction: column;
+    }
+
+    .demonstrar {
+        width: 100%;
+        height: 200px;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+    }
+
+    .form-group {
+        width: 90%;
+    }
+
+    button {
+        width: 90%;
+    }
+}
+.tela {
+    position: relative;
+}
+
+.container {
+    transition: transform 0.5s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.container.registroAtivo {
+    transform: translateX(-60%);
+}
+

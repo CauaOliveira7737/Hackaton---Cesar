@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Registro - Estuda Aí</title>
+    <link rel="stylesheet" href="/static/login.css">
+</head>
+
+<body>
+    <div class="tela">
+        <div class="demonstrar">
+            <img src="/static/videos/logosemtexto.png">
+            <h2>Bem-vindo ao Estuda Aí</h2>
+            <p>Facilitando seus estudos de forma simples e prática.</p>
+        </div>
+
+        <div class="form-area" id="formArea">
+
+            <div class="formulario ativo" id="formLogin">
+                <h1>Login</h1>
+                <form method="POST" action="/login" class="form-content">
+                    <label for="loginUser">Usuário:</label>
+                    <input type="text" id="loginUser" name="username" required>
+
+                    <label for="loginPass">Senha:</label>
+                    <input type="password" id="loginPass" name="password" required>
+
+                    <button type="submit">Entrar</button>
+                </form>
+                <p class="texto-login">Não tem uma conta? <a href="#" id="linkToRegistro">Registrar</a></p>
+            </div>
+
+            <div class="formulario" id="formRegistro">
+                <h1>Registro</h1>
+                <form method="POST" action="/registro" class="form-content">
+                    <label for="regUser">Usuário:</label>
+                    <input type="text" id="regUser" name="username" required>
+
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" name="email" required>
+
+                    <label for="regPass">Senha:</label>
+                    <input type="password" id="regPass" name="password" required>
+
+                    <button type="submit">Registrar</button>
+                </form>
+                <p class="texto-login">Já tem uma conta? <a href="#" id="linkToLogin">Entrar</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src='/static/js/loginregistro.js'></script>
+</body>
+
+</html>

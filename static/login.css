@@ -1,0 +1,162 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.tela {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.demonstrar {
+    background: linear-gradient(135deg, #0047AB, #007BFF);
+    color: white;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-right: 60px;
+}
+
+.demonstrar img {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: -120px;
+}
+
+.demonstrar h2 {
+    font-size: 38px;
+    margin: 0;
+    font-weight: 700;
+    margin-bottom: -20px;
+}
+
+.demonstrar p {
+    font-weight: 360;
+}
+
+.form-area {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.397);
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 45px;
+    transition: transform 0.5s ease;
+}
+
+.form-area .form-content {
+    width: 65%;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 45px;
+}
+
+input:focus {
+    border: 1px solid #0047AB;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0047AB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    height: 45px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #013d91;
+}
+
+.texto-login {
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.texto-login a {
+    color: #0047AB;
+    text-decoration: none;
+}
+
+.texto-login a:hover {
+    text-decoration: underline;
+}
+
+.form-area.mover {
+    transform: translateX(-100%);
+}
+
+.formulario {
+    display: none;
+}
+
+.formulario.ativo {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .tela {
+        flex-direction: column;
+    }
+
+    .demonstrar {
+        width: 100%;
+        height: 200px;
+    }
+
+    .form-area {
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
