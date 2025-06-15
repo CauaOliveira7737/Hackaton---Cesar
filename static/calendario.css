@@ -23,10 +23,10 @@ body {
   padding: 2rem;
 }
 
-h1 {
+/*.container h1 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-}
+}*/
 
 button {
   background: var(--accent);
@@ -94,3 +94,4 @@ input, select {
   background: var(--accent);
   color: white;
 }
+

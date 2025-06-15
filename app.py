@@ -18,7 +18,7 @@ class Favoritos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
     video_id = db.Column(db.Integer, nullable=False)  
-
+    
     usuario = db.relationship('Usuarios', backref=db.backref('favoritos', lazy=True))
 
 class Atividade(db.Model):

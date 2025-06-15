@@ -8,6 +8,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/static/index.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -28,37 +29,46 @@
         </div>
     </header>
     <div class="overlay" id="overlay"></div>
-
+    <!-- 
     <div class="menu-lateral" id="menuLateral">
         <span class="fechar-menu" id="fecharMenu">&times;</span>
+
+        <div class="perfil-menu">
+            <div class="foto-perfil"></div>
+            <p class="nome-perfil">Nome do Usuário</p>
+        </div>
+
         <ul class="icons-cards">
             <li class="icons-menu">
                 <a class="nome-menu" href="/index">
-                    <i class="fa fa-home icons_"></i> Início
+                    <i data-lucide="home"></i> Início
                 </a>
             </li>
             <li class="icons-menu">
                 <a href="/calendario">
-                    <i class="fa fa-calendar icons_"></i> Calendário
+                    <i data-lucide="calendar"></i> Cronograma
                 </a>
             </li>
             <li class="icons-menu">
                 <a href="/salvos">
-                    <i class="fa fa-bookmark icons_"></i> Salvos
+                    <i data-lucide="bookmark"></i> Salvos
                 </a>
             </li>
             <li class="icons-menu">
                 <a href="/perfil">
-                    <i class="fa fa-user icons_"></i> Perfil
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/logout">
-                    <i class="fa fa-chevron-left icons_"></i> Sair
+                    <i data-lucide="user"></i> Perfil
                 </a>
             </li>
         </ul>
+
+        <div class="sair-menu">
+            <a href="/logout">
+                <i data-lucide="log-out"></i> Sair
+            </a>
+        </div>
     </div>
+    -->
+
 
 
     <main>
@@ -122,6 +132,11 @@
     <script src='/static/js/videoplayer.js'></script>
     <script src='/static/js/menulateral.js'></script>
     <script src="/static/js/salvos.js"></script>
+   <!-- <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    -->
 
 </body>
 

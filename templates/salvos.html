@@ -64,10 +64,10 @@
 
 
     <main>
+        {% if videos %}
         <h2 class="h2-salvos">Seus Favoritos</h2>
         <p class="p-salvos">{{ videos|length }} vídeos salvos</p>
         <div class="cards-row">
-            {% if videos %}
             {% for video in videos %}
             <div class="video-card">
                 <div class="video-thumb">
@@ -80,9 +80,6 @@
                     </div>
                     <span class="tempo-video">{{ video.duracao_minutos }} min</span>
                     <span class="categoria-video">{{ video.tipo_video }}</span>
-                    <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}">
-                        <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                    </div>
                     <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}"
                         data-id="{{ video.id }}">
                         <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
@@ -98,7 +95,8 @@
                 </div>
             </div>
             {% endfor %}
-            {% else %}
+        </div>
+        {% else %}
         </div>
         <div class="sem-video">
             <div class="circle-sem-video">
