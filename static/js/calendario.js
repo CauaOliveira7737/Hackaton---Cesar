@@ -19,7 +19,7 @@ function mostrarMensagem(texto, sucesso = true) {
 function carregarAtividades() {
   fetch('/atividades').then(res => res.json()).then(data => {
     atividades = data;
-    filtrar('hoje');
+    filtrar('todas');
   });
 }
 
@@ -69,9 +69,10 @@ function limparFormulario() {
 function filtrar(tipo) {
   const hoje = new Date().toISOString().split('T')[0];
   let lista = atividades;
-  if (tipo === 'hoje') lista = atividades.filter(a => a.data === hoje);
-  if (tipo === 'proximas') lista = atividades.filter(a => a.data > hoje);
+  if (tipo === 'hoje') lista = atividades.filter(a => a.data === hoje && !a.concluida);
+  if (tipo === 'proximas') lista = atividades.filter(a => a.data > hoje && !a.concluida);
   if (tipo === 'concluidas') lista = atividades.filter(a => a.concluida);
+  if (tipo === 'todas') lista = atividades.filter(a => !a.concluida);
   renderizar(lista);
   document.querySelectorAll('.abas button').forEach(btn => btn.classList.remove('active'));
   document.getElementById('btn-' + tipo).classList.add('active');
@@ -88,7 +89,7 @@ function renderizar(lista) {
       <strong>${a.titulo}</strong> - ${a.data} ${a.hora}<br>
       ${a.descricao || ''}<br>
       ${a.duracao} min<br>
-      ${a.externa ? '📍 ' + a.local : 'Categoria: ' + a.categoria}<br>
+      ${a.externa ? ('📍 ' + a.local + '<br>') : ''}Categoria: ${a.categoria}<br>
       <button onclick="toggle(${a.id})">${a.concluida ? 'Desfazer' : 'Concluir'}</button>
       <button onclick="remover(${a.id})">Excluir</button>
     `;
