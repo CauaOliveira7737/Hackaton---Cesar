@@ -3,7 +3,7 @@
   --fg: #111827;
   --muted: #6b7280;
   --card-bg: #ffffff;
-  --accent: #3b82f6;
+  --accent: #0047AB;
   --green: #22c55e;
   --red: #ef4444;
   --border: #e5e7eb;
@@ -18,14 +18,19 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 100%;
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 h1 {
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
 }
 
 button {
@@ -97,6 +102,11 @@ input, select {
 .abas button {
   background: #e5e7eb;
   color: #374151;
+}
+
+.abas button:hover {
+  background: #aaacaf;
+  color: white;
 }
 
 .abas button.active {
@@ -239,4 +249,21 @@ input, select {
 }
 .modal-overlay.active {
   display: block;
+}
+
+.atividade-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.atividades-container {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--muted);
+  background-color: #e2e2e2;
+  min-height: 200px;
+  border-radius: 6px;
 }

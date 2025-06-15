@@ -95,7 +95,13 @@ function filtrar(tipo) {
 function renderizar(lista) {
   const container = document.getElementById('atividades');
   container.innerHTML = '';
-  if (lista.length === 0) return container.innerHTML = '<p>Nenhuma atividade</p>';
+  if (lista.length === 0) {
+    container.className = 'atividades-container';
+    return container.innerHTML = '<p>Nenhuma atividade</p>';
+  }
+  else {
+    container.className = null;
+  }
   lista.forEach(a => {
     const el = document.createElement('div');
     el.className = 'card' + (a.concluida ? ' completed' : '');
@@ -104,6 +110,7 @@ function renderizar(lista) {
       ${a.descricao || ''}<br>
       ${a.duracao} min<br>
       ${a.externa ? ('📍 ' + a.local + '<br>') : ''}Categoria: ${a.categoria}<br>
+      <br>
       <button onclick="toggle(${a.id})">${a.concluida ? 'Desfazer' : 'Concluir'}</button>
       <button class="remover" onclick="remover(${a.id})">Excluir</button>
     `;

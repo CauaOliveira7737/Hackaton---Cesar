@@ -8,9 +8,13 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
-  <h1>Cronograma de Estudos</h1>
-  <button onclick="mostrarFormulario()">Nova Atividade</button>
+  <div class="atividade-header">
+    <h1>Cronograma de Estudos</h1>
+    <button onclick="mostrarFormulario()">Nova Atividade</button>
+  </div>
+  <hr>
   <div id="mensagem-feedback" style="display: none; padding: 10px; border-radius: 6px; margin: 10px 0;"></div>
   <!-- Formulário -->
   <div id="modal-overlay" class="modal-overlay"></div>
