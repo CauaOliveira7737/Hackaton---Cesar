@@ -1,118 +1,59 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Estuda Ai</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='/static/salvos.css'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="/static/calendario.css">
-</head>
+{% block title %}Calendário - Estuda Ai{% endblock %}
 
-<body>
+{% block extra_head %}
+<link rel='stylesheet' type='text/css' media='screen' href='/static/salvos.css'>
+<link rel="stylesheet" href="/static/calendario.css">
+{% endblock %}
 
-  <header>
-    <div class="topo">
-      <div class="left-topo">
-        <img class="logo-topo" src="/static/videos/logosemtexto.png">
-        <h1 class="texto-p">Estuda Ai</h1>
-      </div>
-
-      <div class="nav-topo">
-        <i class="fas fa-bars icon-menu"></i>
-      </div>
+{% block content %}
+<div class="container">
+  <h1>Cronograma de Estudos</h1>
+  <button onclick="mostrarFormulario()">Nova Atividade</button>
+  <div id="mensagem-feedback" style="display: none; padding: 10px; border-radius: 6px; margin: 10px 0;"></div>
+  <!-- Formulário -->
+  <div id="modal-overlay" class="modal-overlay"></div>
+  <div id="formulario" class="formulario modal">
+    <div class="modal-header">
+      <button type="button" class="fechar-modal" onclick="mostrarFormulario()">&times;</button>
     </div>
-  </header>
-  <div class="overlay" id="overlay"></div>
-
-  <div class="menu-lateral" id="menuLateral">
-    <span class="fechar-menu" id="fecharMenu">&times;</span>
-    <ul class="icons-cards">
-      <li class="icons-menu">
-        <a class="nome-menu" href="/index">
-          <i class="fa fa-home icons_"></i> Início
-        </a>
-      </li>
-      <li class="icons-menu">
-        <a href="/calendario">
-          <i class="fa fa-calendar icons_"></i> Calendário
-        </a>
-      </li>
-      <li class="icons-menu">
-        <a href="/salvos">
-          <i class="fa fa-bookmark icons_"></i> Salvos
-        </a>
-      </li>
-      <li class="icons-menu">
-        <a href="/perfil">
-          <i class="fa fa-user icons_"></i> Perfil
-        </a>
-      </li>
-      <li class="icons-menu">
-        <a href="/logout">
-          <i class="fa fa-chevron-left icons_"></i> Sair
-        </a>
-      </li>
-    </ul>
+    <div class="row">
+      <input type="text" id="titulo" placeholder="Título da atividade" />
+      <input type="text" id="descricao" placeholder="Descrição" />
+    </div>
+    <div class="row">
+      <select id="categoria">
+        <option value="matematica">Matemática</option>
+        <option value="idiomas">Idiomas</option>
+        <option value="ciencias">Ciências</option>
+        <option value="historia">História</option>
+        <option value="tecnologia">Tecnologia</option>
+      </select>
+      <label class="label-inline">
+        <input type="checkbox" id="externa"
+          onchange="document.getElementById('local').style.display = this.checked ? 'block' : 'none'" />
+        Externa
+      </label>
+      <input type="text" id="local" placeholder="Local (se externa)" style="display:none;" />
+    </div>
+    <div class="row">
+      <input type="date" id="data" />
+      <input type="time" id="hora" />
+      <input type="number" id="duracao" placeholder="Duração (min)" />
+    </div>
+    <button type="button" onclick="adicionarAtividade()">Salvar</button>
   </div>
+  <div class="abas">
+    <button onclick="filtrar('todas')" id="btn-todas" class="active">Todas</button>
+    <button onclick="filtrar('hoje')" id="btn-hoje">Hoje</button>
+    <button onclick="filtrar('proximas')" id="btn-proximas">Próximas</button>
+    <button onclick="filtrar('concluidas')" id="btn-concluidas">Concluídas</button>
+  </div>
+  <div id="atividades"></div>
+</div>
+{% endblock %}
 
-
-  <main>
-    <div class="container">
-      <h1>Cronograma de Estudos</h1>
-
-      <button onclick="mostrarFormulario()">Nova Atividade</button>
-
-      <div id="mensagem-feedback" style="display: none; padding: 10px; border-radius: 6px; margin: 10px 0;"></div>
-
-      <!-- Formulário -->
-      <div id="modal-overlay" class="modal-overlay"></div>
-      <div id="formulario" class="formulario modal">
-        <div class="modal-header">
-          <button type="button" class="fechar-modal" onclick="mostrarFormulario()">&times;</button>
-        </div>
-        <div class="row">
-          <input type="text" id="titulo" placeholder="Título da atividade" />
-          <input type="text" id="descricao" placeholder="Descrição" />
-        </div>
-        <div class="row">
-          <select id="categoria">
-            <option value="matematica">Matemática</option>
-            <option value="idiomas">Idiomas</option>
-            <option value="ciencias">Ciências</option>
-            <option value="historia">História</option>
-            <option value="tecnologia">Tecnologia</option>
-          </select>
-          <label class="label-inline">
-            <input type="checkbox" id="externa"
-              onchange="document.getElementById('local').style.display = this.checked ? 'block' : 'none'" />
-            Externa
-          </label>
-          <input type="text" id="local" placeholder="Local (se externa)" style="display:none;" />
-        </div>
-        <div class="row">
-          <input type="date" id="data" />
-          <input type="time" id="hora" />
-          <input type="number" id="duracao" placeholder="Duração (min)" />
-        </div>
-        <button type="button" onclick="adicionarAtividade()">Salvar</button>
-      </div>
-
-      <div class="abas">
-        <button onclick="filtrar('todas')" id="btn-todas" class="active">Todas</button>
-        <button onclick="filtrar('hoje')" id="btn-hoje">Hoje</button>
-        <button onclick="filtrar('proximas')" id="btn-proximas">Próximas</button>
-        <button onclick="filtrar('concluidas')" id="btn-concluidas">Concluídas</button>
-      </div>
-
-      <div id="atividades"></div>
-    </div>
-  </main>
-  <script src='/static/js/menulateral.js'></script>
-  <script src="/static/js/calendario.js"></script>
-
-</body>
-
-</html>
+{% block extra_scripts %}
+<script src="/static/js/calendario.js"></script>
+{% endblock %}
