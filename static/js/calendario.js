@@ -1,9 +1,22 @@
 let atividades = [];
 
 function mostrarFormulario() {
-  const f = document.getElementById('formulario');
-  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+  const modal = document.getElementById('formulario');
+  const overlay = document.getElementById('modal-overlay');
+  const aberto = modal.style.display === 'block';
+  if (aberto) {
+    modal.style.display = 'none';
+    overlay.classList.remove('active');
+  } else {
+    modal.style.display = 'block';
+    overlay.classList.add('active');
+  }
 }
+
+// Fecha o modal ao clicar fora dele
+document.getElementById('modal-overlay').addEventListener('click', function() {
+  mostrarFormulario();
+});
 
 function mostrarMensagem(texto, sucesso = true) {
   const msg = document.getElementById('mensagem-feedback');
@@ -47,6 +60,7 @@ function adicionarAtividade() {
     .then(() => {
       mostrarMensagem("Atividade salva com sucesso!", true);
       limparFormulario();
+      mostrarFormulario();
       carregarAtividades();
     })
     .catch(() => {
@@ -91,7 +105,7 @@ function renderizar(lista) {
       ${a.duracao} min<br>
       ${a.externa ? ('📍 ' + a.local + '<br>') : ''}Categoria: ${a.categoria}<br>
       <button onclick="toggle(${a.id})">${a.concluida ? 'Desfazer' : 'Concluir'}</button>
-      <button onclick="remover(${a.id})">Excluir</button>
+      <button class="remover" onclick="remover(${a.id})">Excluir</button>
     `;
     container.appendChild(el);
   });

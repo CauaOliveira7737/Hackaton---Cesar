@@ -68,7 +68,11 @@
       <div id="mensagem-feedback" style="display: none; padding: 10px; border-radius: 6px; margin: 10px 0;"></div>
 
       <!-- Formulário -->
-      <div id="formulario" class="formulario" style="display:none;">
+      <div id="modal-overlay" class="modal-overlay"></div>
+      <div id="formulario" class="formulario modal">
+        <div class="modal-header">
+          <button type="button" class="fechar-modal" onclick="mostrarFormulario()">&times;</button>
+        </div>
         <div class="row">
           <input type="text" id="titulo" placeholder="Título da atividade" />
           <input type="text" id="descricao" placeholder="Descrição" />
@@ -93,7 +97,7 @@
           <input type="time" id="hora" />
           <input type="number" id="duracao" placeholder="Duração (min)" />
         </div>
-        <button onclick="adicionarAtividade()">Salvar</button>
+        <button type="button" onclick="adicionarAtividade()">Salvar</button>
       </div>
 
       <div class="abas">
