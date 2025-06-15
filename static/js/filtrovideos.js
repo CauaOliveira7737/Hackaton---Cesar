@@ -1,36 +1,46 @@
 document.addEventListener("DOMContentLoaded", function () {
     const filtros = document.querySelectorAll(".navegacao-reels");
     const cards = document.querySelectorAll(".video-card");
+    const inputBusca = document.querySelector(".input-topo");
 
     let filtroAtivo = null;
 
+    function aplicarFiltros() {
+        const termoBusca = inputBusca.value.toLowerCase().trim();
+        const categoria = filtroAtivo ? filtroAtivo.querySelector(".texto-nav").innerText.trim() : "Todos";
+
+        cards.forEach(card => {
+            const cardCategoria = card.getAttribute("data-categoria").trim();
+            const titulo = card.querySelector(".titulo-video").textContent.toLowerCase();
+
+            const categoriaOk = (categoria === "Todos") || (cardCategoria === categoria);
+            const buscaOk = titulo.includes(termoBusca);
+
+            if (categoriaOk && buscaOk) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
     filtros.forEach(filtro => {
         filtro.addEventListener("click", () => {
-            const categoria = filtro.querySelector(".texto-nav").innerText.trim();
-
-            // Se o filtro clicado já estiver ativo, remove o filtro (mostra todos)
             if (filtroAtivo === filtro) {
-                cards.forEach(card => {
-                    card.style.display = "block";
-                });
                 filtro.classList.remove("ativo-filtro");
                 filtroAtivo = null;
             } else {
-                // Aplica o novo filtro
                 filtros.forEach(f => f.classList.remove("ativo-filtro"));
                 filtro.classList.add("ativo-filtro");
                 filtroAtivo = filtro;
-
-                cards.forEach(card => {
-                    const cardCategoria = card.getAttribute("data-categoria").trim();
-
-                    if (categoria === "Todos" || cardCategoria === categoria) {
-                        card.style.display = "block";
-                    } else {
-                        card.style.display = "none";
-                    }
-                });
             }
+            aplicarFiltros();
         });
     });
+
+    inputBusca.addEventListener("input", () => {
+        aplicarFiltros();
+    });
+
+    aplicarFiltros();
 });

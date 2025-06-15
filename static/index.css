@@ -132,6 +132,7 @@ main{
     box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     margin-bottom: 10px;
     font-size: 14px;
+    cursor: pointer;
   
 }
 .video-thumb {
@@ -318,7 +319,6 @@ main{
     background-color: #163662;
     border-radius: 20px;
     height: 50px;
-    
     
 }
 a {

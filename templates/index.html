@@ -32,26 +32,31 @@
     <div class="menu-lateral" id="menuLateral">
         <span class="fechar-menu" id="fecharMenu">&times;</span>
         <ul class="icons-cards">
-            <div class="icons-menu">
-                <li><a class="nome-menu" href="/index">Início</a></li>
-                <i class="fa fa-home icons_"></i>
-            </div>
-            <div class="icons-menu">
-                <li><a href="/calendario">Calendário</a></li>
-                <i class="fa fa-calendar icons_"></i>
-            </div>
-            <div class="icons-menu">
-                <li><a href="/salvos">Salvos</a></li>
-                <i class="fa fa-bookmark icons_"></i>
-            </div>
-            <div class="icons-menu">
-                <li><a href="/perfil">Perfil</a></li>
-                <i class="fa fa-user icons_"></i>
-            </div>
-            <div class="icons-menu">
-                <li><a href="/logout">Sair</a></li>
-                <i class="fa fa-chevron-left icons_"></i>
-            </div>
+            <li class="icons-menu">
+                <a class="nome-menu" href="/index">
+                    <i class="fa fa-home icons_"></i> Início
+                </a>
+            </li>
+            <li class="icons-menu">
+                <a href="/calendario">
+                    <i class="fa fa-calendar icons_"></i> Calendário
+                </a>
+            </li>
+            <li class="icons-menu">
+                <a href="/salvos">
+                    <i class="fa fa-bookmark icons_"></i> Salvos
+                </a>
+            </li>
+            <li class="icons-menu">
+                <a href="/perfil">
+                    <i class="fa fa-user icons_"></i> Perfil
+                </a>
+            </li>
+            <li class="icons-menu">
+                <a href="/logout">
+                    <i class="fa fa-chevron-left icons_"></i> Sair
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -88,7 +93,7 @@
                     <div class="controles-video">
                         <button class="playPause"><i class="fas fa-play"></i></button>
                     </div>
-                    <span class="tempo-video">{{ video.duracao_minutos }} min</span>
+                    <span class="tempo-video"></span>
                     <span class="categoria-video">{{ video.tipo_video }}</span>
                     <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}">
                         <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
@@ -97,8 +102,6 @@
                         data-id="{{ video.id }}">
                         <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
                     </div>
-
-
 
                 </div>
                 <div class="info-video">

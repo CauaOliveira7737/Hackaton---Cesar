@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             indicator.classList.add("show");
             setTimeout(() => {
                 indicator.classList.remove("show");
-            }, 800);  
+            }, 800);
         }
 
         function updateIcon() {
@@ -63,9 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
         video.addEventListener("click", () => {
             playPauseBtn.classList.remove("hide");
 
-            if (!video.paused) {
+            if (video.paused) {
+                video.play();
                 scheduleHide();
             } else {
+                video.pause();
                 clearTimeout(hideTimeout);
             }
         });
@@ -81,6 +83,33 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 video.currentTime = Math.min(video.currentTime + 5, video.duration);
                 showIndicator(rightIndicator);
+            }
+        });
+
+        let totalMin = 0;
+        let totalSec = 0;
+
+        video.addEventListener("loadedmetadata", function () {
+            let duration = video.duration;
+            totalMin = Math.floor(duration / 60);
+            totalSec = Math.floor(duration % 60);
+            if (totalSec < 10) totalSec = "0" + totalSec;
+
+            let tempoVideoSpan = container.querySelector(".tempo-video");
+            if (tempoVideoSpan) {
+                tempoVideoSpan.textContent = `0:00 / ${totalMin}:${totalSec}`;
+            }
+        });
+
+        video.addEventListener("timeupdate", function () {
+            let current = video.currentTime;
+            let currentMin = Math.floor(current / 60);
+            let currentSec = Math.floor(current % 60);
+            if (currentSec < 10) currentSec = "0" + currentSec;
+
+            let tempoVideoSpan = container.querySelector(".tempo-video");
+            if (tempoVideoSpan) {
+                tempoVideoSpan.textContent = `${currentMin}:${currentSec} / ${totalMin}:${totalSec}`;
             }
         });
     });

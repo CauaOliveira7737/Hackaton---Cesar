@@ -108,17 +108,24 @@ body {
     font-size: 14px;
     font-weight: 380;
 }
+.cards-row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    gap: 10px;
+    justify-content: center;
+
+}
 .video-card {
-    min-width: 290px;
-    max-width: 430px;
+    min-width: 250px;
+    max-width: 400px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    margin-left: 15px;
     margin-bottom: 10px;
     font-size: 14px;
-  
+    cursor: pointer;
 }
 .video-thumb {
     position: relative;

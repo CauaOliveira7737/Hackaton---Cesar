@@ -53,12 +53,10 @@ def favoritar():
     favorito = Favoritos.query.filter_by(user_id=user_id, video_id=video_id).first()
 
     if favorito:
-        # Remove favorito
         db.session.delete(favorito)
         db.session.commit()
         return jsonify({'status': 'removido'})
     else:
-        # Adiciona favorito
         novo_favorito = Favoritos(user_id=user_id, video_id=video_id)
         db.session.add(novo_favorito)
         db.session.commit()
@@ -105,21 +103,25 @@ def ver_salvos():
         return redirect('/login')
 
     user_id = session['user_id']
+    busca = request.args.get('q', '').lower().strip()
 
-    # Pega os vídeos favoritados desse usuário
     favoritos = Favoritos.query.filter_by(user_id=user_id).all()
     video_ids = [fav.video_id for fav in favoritos]
 
-    # Carrega os dados dos vídeos do JSON
     with open('static/dados_video/arquivo.json', 'r', encoding='utf-8') as f:
         dados = json.load(f)
 
     todos_videos = dados['videos']
 
-    # Filtra só os vídeos que estão nos favoritos do usuário
-    videos_favoritos = [v for v in todos_videos if v['id'] in video_ids]
+    videos_favoritos = []
+    for v in todos_videos:
+        if v['id'] in video_ids:
+            if busca == '' or busca in v['titulo'].lower():
+                v['favorito'] = True
+                videos_favoritos.append(v)
 
-    return render_template('salvos.html', videos=videos_favoritos)
+    return render_template('salvos.html', videos=videos_favoritos, busca=busca)
+
 
 
 @app.route('/calendario')
@@ -142,7 +144,7 @@ def salvar_video():
 
     if video_id not in session['favoritos']:
         session['favoritos'].append(video_id)
-        session.modified = True  # Importante para o Flask saber que a sessão mudou
+        session.modified = True  
 
     return jsonify({'success': True})
 
@@ -157,16 +159,16 @@ def toggle_favorito():
     favorito = Favoritos.query.filter_by(user_id=session['user_id'], video_id=video_id).first()
 
     if favorito:
-        # Se já está favoritado → Remover
         db.session.delete(favorito)
         db.session.commit()
         return jsonify({'success': True, 'favorited': False})
     else:
-        # Se ainda não estava → Adicionar
         novo_favorito = Favoritos(user_id=session['user_id'], video_id=video_id)
         db.session.add(novo_favorito)
         db.session.commit()
         return jsonify({'success': True, 'favorited': True})
+
+
 
 if __name__ == '__main__':
     with app.app_context():

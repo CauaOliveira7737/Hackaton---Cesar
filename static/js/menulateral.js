@@ -17,6 +17,18 @@ menuBtn.addEventListener('click', abrirMenu);
 fecharBtn.addEventListener('click', fecharMenu);
 overlay.addEventListener('click', fecharMenu);
 
-document.getElementById('link-salvos').addEventListener('click', function() {
-    window.location.href = '/salvos';
+document.querySelectorAll('.icons-menu').forEach(menu => {
+    menu.addEventListener('click', () => {
+        const link = menu.querySelector('a');
+        if (link) {
+            window.location.href = link.href;
+        }
+    });
 });
+
+const linkSalvos = document.getElementById('link-salvos');
+if (linkSalvos) {
+    linkSalvos.addEventListener('click', function() {
+        window.location.href = '/salvos';
+    });
+}
