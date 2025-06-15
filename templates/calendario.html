@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendário de Atividades</title>
+  <link rel="stylesheet" href="/static/calendario.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Cronograma de Estudos</h1>
+
+    <button onclick="mostrarFormulario()">Nova Atividade</button>
+
+    <!-- ✅ Mensagem de feedback -->
+    <div id="mensagem-feedback" style="display: none; padding: 10px; border-radius: 6px; margin: 10px 0;"></div>
+
+    <!-- Formulário -->
+    <div id="formulario" class="formulario" style="display:none;">
+      <div class="row">
+        <input type="text" id="titulo" placeholder="Título da atividade" />
+        <input type="text" id="descricao" placeholder="Descrição" />
+      </div>
+      <div class="row">
+        <select id="categoria">
+          <option value="matematica">Matemática</option>
+          <option value="idiomas">Idiomas</option>
+          <option value="ciencias">Ciências</option>
+          <option value="historia">História</option>
+          <option value="tecnologia">Tecnologia</option>
+        </select>
+        <label class="label-inline">
+          <input type="checkbox" id="externa" onchange="document.getElementById('local').style.display = this.checked ? 'block' : 'none'" />
+          Externa
+        </label>
+        <input type="text" id="local" placeholder="Local (se externa)" style="display:none;" />
+      </div>
+      <div class="row">
+        <input type="date" id="data" />
+        <input type="time" id="hora" />
+        <input type="number" id="duracao" placeholder="Duração (min)" />
+      </div>
+      <button onclick="adicionarAtividade()">Salvar</button>
+    </div>
+
+    <!-- Abas -->
+    <div class="abas">
+      <button onclick="filtrar('hoje')" id="btn-hoje">Hoje</button>
+      <button onclick="filtrar('proximas')" id="btn-proximas">Próximas</button>
+      <button onclick="filtrar('concluidas')" id="btn-concluidas">Concluídas</button>
+      <button onclick="filtrar('todas')" id="btn-todas" class="active">Todas</button>
+    </div>
+
+    <div id="atividades"></div>
+  </div>
+
+  <script src="/static/js/calendario.js"></script>
+</body>
+</html>

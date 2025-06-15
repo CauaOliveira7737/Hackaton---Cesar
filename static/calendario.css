@@ -1,0 +1,96 @@
+:root {
+  --bg: #f9fafb;
+  --fg: #111827;
+  --muted: #6b7280;
+  --card-bg: #ffffff;
+  --accent: #3b82f6;
+  --green: #22c55e;
+  --red: #ef4444;
+  --border: #e5e7eb;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 0.25rem;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+input, select {
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.card.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.formulario {
+  margin-bottom: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.formulario .row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.abas {
+  margin-bottom: 1rem;
+}
+
+.abas button {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.abas button.active {
+  background: var(--accent);
+  color: white;
+}

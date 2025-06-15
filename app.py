@@ -21,6 +21,22 @@ class Favoritos(db.Model):
 
     usuario = db.relationship('Usuarios', backref=db.backref('favoritos', lazy=True))
 
+class Atividade(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(120), nullable=False)
+    descricao = db.Column(db.Text)
+    categoria = db.Column(db.String(50))
+    data = db.Column(db.String(10))  # YYYY-MM-DD
+    hora = db.Column(db.String(5))   # HH:MM
+    duracao = db.Column(db.Integer)
+    concluida = db.Column(db.Boolean, default=False)
+    externa = db.Column(db.Boolean, default=False)
+    local = db.Column(db.String(120))
+    user_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+
+
+# TELAS -----------------------------------------------------------
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -39,28 +55,6 @@ def index():
 
     return render_template('index.html', videos=videos)
     
-@app.route('/favoritar', methods=['POST'])
-def favoritar():
-    if 'user_id' not in session:
-        return jsonify({'erro': 'Usuário não logado'}), 401
-
-    user_id = session['user_id']
-    video_id = request.json.get('video_id')
-
-    if not video_id:
-        return jsonify({'erro': 'Vídeo inválido'}), 400
-
-    favorito = Favoritos.query.filter_by(user_id=user_id, video_id=video_id).first()
-
-    if favorito:
-        db.session.delete(favorito)
-        db.session.commit()
-        return jsonify({'status': 'removido'})
-    else:
-        novo_favorito = Favoritos(user_id=user_id, video_id=video_id)
-        db.session.add(novo_favorito)
-        db.session.commit()
-        return jsonify({'status': 'adicionado'})
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
@@ -92,10 +86,15 @@ def login():
     
     return render_template('login.html')
 
-@app.route('/logout')
-def logout():
-    session.pop('user_id', None)
-    return redirect('/login')
+@app.route('/calendario')
+def calendario():
+    if 'user_id' not in session:
+        return redirect('/login')
+    return render_template('calendario.html')
+    
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
 
 @app.route('/salvos')
 def ver_salvos():
@@ -123,14 +122,35 @@ def ver_salvos():
     return render_template('salvos.html', videos=videos_favoritos, busca=busca)
 
 
+# FUNÇÕES -----------------------------------------------------------
 
-@app.route('/calendario')
-def calendario():
-    return render_template('calendario.html')
-    
-@app.route('/perfil')
-def perfil():
-    return render_template('perfil.html')
+@app.route('/favoritar', methods=['POST'])
+def favoritar():
+    if 'user_id' not in session:
+        return jsonify({'erro': 'Usuário não logado'}), 401
+
+    user_id = session['user_id']
+    video_id = request.json.get('video_id')
+
+    if not video_id:
+        return jsonify({'erro': 'Vídeo inválido'}), 400
+
+    favorito = Favoritos.query.filter_by(user_id=user_id, video_id=video_id).first()
+
+    if favorito:
+        db.session.delete(favorito)
+        db.session.commit()
+        return jsonify({'status': 'removido'})
+    else:
+        novo_favorito = Favoritos(user_id=user_id, video_id=video_id)
+        db.session.add(novo_favorito)
+        db.session.commit()
+        return jsonify({'status': 'adicionado'})
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/login')
 
 @app.route('/salvar_video', methods=['POST'])
 def salvar_video():
@@ -168,10 +188,69 @@ def toggle_favorito():
         db.session.commit()
         return jsonify({'success': True, 'favorited': True})
 
+@app.route('/atividades', methods=['GET'])
+def listar_atividades():
+    if 'user_id' not in session:
+        return jsonify([])
+    atividades = Atividade.query.filter_by(user_id=session['user_id']).all()
+    return jsonify([{
+        'id': a.id,
+        'titulo': a.titulo,
+        'descricao': a.descricao,
+        'categoria': a.categoria,
+        'data': a.data,
+        'hora': a.hora,
+        'duracao': a.duracao,
+        'concluida': a.concluida,
+        'externa': a.externa,
+        'local': a.local
+    } for a in atividades])
+
+@app.route('/atividades', methods=['POST'])
+def adicionar_atividade():
+    if 'user_id' not in session:
+        return jsonify({'erro': 'Não autenticado'}), 401
+    dados = request.json
+    nova = Atividade(
+        titulo=dados['titulo'],
+        descricao=dados.get('descricao'),
+        categoria=dados.get('categoria', 'geral'),
+        data=dados['data'],
+        hora=dados['hora'],
+        duracao=dados['duracao'],
+        concluida=False,
+        externa=dados.get('externa', False),
+        local=dados.get('local'),
+        user_id=session['user_id']
+    )
+    db.session.add(nova)
+    db.session.commit()
+    return jsonify({'sucesso': True})
+
+@app.route('/atividades/<int:id>/toggle', methods=['POST'])
+def alternar_conclusao(id):
+    if 'user_id' not in session:
+        return jsonify({'erro': 'Não autenticado'}), 401
+    atv = Atividade.query.filter_by(id=id, user_id=session['user_id']).first()
+    if not atv:
+        return jsonify({'erro': 'Não encontrada'}), 404
+    atv.concluida = not atv.concluida
+    db.session.commit()
+    return jsonify({'sucesso': True, 'concluida': atv.concluida})
+
+@app.route('/atividades/<int:id>', methods=['DELETE'])
+def deletar_atividade(id):
+    if 'user_id' not in session:
+        return jsonify({'erro': 'Não autenticado'}), 401
+    atv = Atividade.query.filter_by(id=id, user_id=session['user_id']).first()
+    if not atv:
+        return jsonify({'erro': 'Não encontrada'}), 404
+    db.session.delete(atv)
+    db.session.commit()
+    return jsonify({'sucesso': True})
 
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
