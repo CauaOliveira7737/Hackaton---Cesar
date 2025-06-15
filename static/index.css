@@ -56,6 +56,18 @@ body {
     flex-direction: row;
     align-items: center;
 }
+.left-topo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo-topo{
+    height: 160px;
+    margin-bottom: -30px;
+    margin-right: -20px;
+    margin-left: -20px;
+
+}
 .navegacao{
     display: flex;
     flex-direction: row;
@@ -76,10 +88,13 @@ body {
     width: 100%;
     background-color: rgb(253, 253, 253);
     min-height: 50px;
-    padding: 10px;
+    align-items: center;
+    
 }
 .navegacao-reels{
-    margin: 8px;
+    margin: 10px 10px 10px 0px;
+    height: 20px;
+    min-width: 40px;
     padding: 8px;
     padding-left: 10px;
     padding-right: 10px;
@@ -96,14 +111,25 @@ body {
     font-size: 14px;
     font-weight: 380;
 }
+main{
+    padding-left: 20px;
+}
+.cards-row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    gap: 10px;
+    justify-content: center;
+
+}
 .video-card {
     min-width: 250px;
     max-width: 400px;
+    min-height: 800px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    margin-left: 15px;
     margin-bottom: 10px;
     font-size: 14px;
   
@@ -200,6 +226,7 @@ body {
     height: 24px;
     width: 14px;
     align-content: center;
+    cursor: pointer;
 }
 .autor-vizu{
     display: flex;
@@ -301,4 +328,46 @@ a {
 .icons_{
     font-size: 12px;
     margin-left: 8px;
+}
+.navegacao-reels.ativo-filtro {
+    background-color: #0047AB;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.video-indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.video-indicator.left {
+    left: 20px;
+}
+
+.video-indicator.right {
+    right: 20px;
+}
+
+.video-indicator.show {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+}
+.favoritar-video i {
+    color: gray;
+    cursor: pointer;
+}
+
+.favoritar-video.favorito-ativo {
+    background-color: #0047AB;
+}
+
+.favoritar-video.favorito-ativo i {
+    color: #ffffff;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -8,11 +9,15 @@
     <link rel='stylesheet' type='text/css' media='screen' href='/static/index.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    
+
     <header>
         <div class="topo">
-            <h1 class="texto-p">Estuda Ai</h1>
+            <div class="left-topo">
+                <img class="logo-topo" src="/static/videos/logosemtexto.png">
+                <h1 class="texto-p">Estuda Ai</h1>
+            </div>
             <div class="barra-pesquisa">
                 <i class="fas fa-search procurar-topo"></i>
                 <input class="input-topo" type="text" placeholder="Buscar vídeos educativos...">
@@ -24,31 +29,31 @@
     </header>
     <div class="overlay" id="overlay"></div>
 
-<div class="menu-lateral" id="menuLateral">
-    <span class="fechar-menu" id="fecharMenu">&times;</span>
-    <ul class="icons-cards">
-        <div class="icons-menu">
-            <li><a class="nome-menu" href="/templates/index.html">Início</a></li>
-            <i class="fa fa-home icons_"></i>
-        </div>
-        <div class="icons-menu">
-            <li><a href="/templates/calendario.html">Calendário</a></li>
-            <i class="fa fa-calendar icons_"></i>
-        </div>
-        <div class="icons-menu">
-            <li><a href="/templates/salvos.html">Salvos</a></li>
-            <i class="fa fa-bookmark icons_"></i>
-        </div>
-        <div class="icons-menu">
-            <li><a href="/templates/perfil.html">Perfil</a></li>
-            <i class="fa fa-user icons_"></i>
-        </div>
-        <div class="icons-menu">
-            <li><a href="/templates/index.html">Sair</a></li>
-            <i class="fa fa-chevron-left icons_"></i>
-        </div>
-    </ul>
-</div>
+    <div class="menu-lateral" id="menuLateral">
+        <span class="fechar-menu" id="fecharMenu">&times;</span>
+        <ul class="icons-cards">
+            <div class="icons-menu">
+                <li><a class="nome-menu" href="/index">Início</a></li>
+                <i class="fa fa-home icons_"></i>
+            </div>
+            <div class="icons-menu">
+                <li><a href="/calendario">Calendário</a></li>
+                <i class="fa fa-calendar icons_"></i>
+            </div>
+            <div class="icons-menu">
+                <li><a href="/salvos">Salvos</a></li>
+                <i class="fa fa-bookmark icons_"></i>
+            </div>
+            <div class="icons-menu">
+                <li><a href="/perfil">Perfil</a></li>
+                <i class="fa fa-user icons_"></i>
+            </div>
+            <div class="icons-menu">
+                <li><a href="/logout">Sair</a></li>
+                <i class="fa fa-chevron-left icons_"></i>
+            </div>
+        </ul>
+    </div>
 
 
     <main>
@@ -72,33 +77,49 @@
                 <p class="texto-nav">Tecnologia</p>
             </div>
         </div>
-        <div class="video-card">
-            <div class="video-thumb">
-                <video controls width="100%">
-                    <source src="/static/videos/Download.mp4" type="video/mp4">
-                     Seu navegador não suporta o vídeo.
-                </video>
-                <div class="controles-video">
-                    <button class="playPause"><i class="fas fa-play"></i></button>
+        <div class="cards-row">
+            {% for video in videos %}
+            <div class="video-card" data-id="{{ video.id }}" data-categoria="{{video.tipo_video}}">
+                <div class="video-thumb">
+                    <video controls width="100%">
+                        <source src="{{ video.link_video }}" type="video/mp4">
+                        Seu navegador não suporta o vídeo.
+                    </video>
+                    <div class="controles-video">
+                        <button class="playPause"><i class="fas fa-play"></i></button>
+                    </div>
+                    <span class="tempo-video">{{ video.duracao_minutos }} min</span>
+                    <span class="categoria-video">{{ video.tipo_video }}</span>
+                    <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}">
+                        <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                    </div>
+                    <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}"
+                        data-id="{{ video.id }}">
+                        <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                    </div>
+
+
+
                 </div>
-                <span class="tempo-video">1:30</span>
-                <span class="categoria-video">Matemática</span>
-                <div class="favoritar-video">
-                    <i class="fa far fa-bookmark"></i>
+                <div class="info-video">
+                    <p class="titulo-video">{{ video.titulo }}</p>
+                    <p class="descricao-video">{{ video.descricao }}</p>
+                    <div class="autor-vizu">
+                        <p class="autor-video">{{ video.autor }}</p>
+                        <p class="vizu-video">{{ video.visualizacoes }}</p>
+                    </div>
                 </div>
             </div>
-            <div class="info-video">
-                <p class="titulo-video">Equações do 2º Grau Simplificadas</p>
-                <p class="descricao-video">Aprenda a resolver equações de forma rápida e eficiente</p>
-                <div class="autor-vizu">
-                    <p class="autor-video">Prof. Ana Silva</p>
-                    <p class="vizu-video">12.5k visualizações</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
+
     </main>
+    <script src='/static/js/filtrovideos.js'></script>
     <script src='/static/js/videoplayer.js'></script>
     <script src='/static/js/menulateral.js'></script>
+    <script src="/static/js/salvos.js"></script>
+
 </body>
+
 </html>

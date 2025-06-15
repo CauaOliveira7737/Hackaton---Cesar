@@ -1,0 +1,77 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "titulo": "Como começar na programação do zero! Aprender a programar",
+      "descricao": "Aprenda a programar",
+      "autor": "ojuliocode",
+      "visualizacoes": "13.5k",
+      "duracao_minutos": 0.20,
+      "tipo_video": "Tecnologia",
+      "link_video": "/static/dados_video/videos/comecar_programacao.mp4"
+    },
+    {
+      "id": 2,
+      "titulo": "FRASES em INGLÊS BÁSICO que você precisa SABER",
+      "descricao": "Hoje você vai aprender algumas das FRASES mais usadas em INGLÊS BÁSICO",
+      "autor": "Teacher Elza",
+      "visualizacoes": " 5 mi",
+      "duracao_minutos": 0.20,
+      "tipo_video": "Idiomas",
+      "link_video": "/static/dados_video/videos/frases_ingles.mp4"
+
+    },
+    {
+      "id": 3,
+      "titulo": "A História do Átomo em 1 minuto",
+      "descricao": "Conheça a rica história e cheia de reviravoltas dos modelos atômicos",
+      "autor": "Ciência Todo Dia",
+      "visualizacoes": "400 k ",
+      "duracao_minutos": 1.00,
+      "tipo_video": "Ciências",
+      "link_video": "/static/dados_video/videos/historia_atomo.mp4"
+    },
+    {
+      "id": 4,
+      "titulo": "REVOLUÇÃO FRANCESA",
+      "descricao": "Saiba mais sobre esse marco histórico",
+      "autor": "CanalHistory",
+      "visualizacoes": "20 k",
+      "duracao_minutos": 1.00,
+      "tipo_video": "História",
+      "link_video": "/static/dados_video/videos/revolucao_francesa.mp4"
+    },
+    {
+      "id": 5,
+      "titulo": "A Surpreendente história do escravo chicoteado",
+      "descricao": "Uma das fotografias mais tristes da história",
+      "autor": "fatosemfotoscanal",
+      "visualizacoes": "20 k",
+      "duracao_minutos": 1.00,
+      "tipo_video": "História",
+      "link_video": "/static/dados_video/videos/historia_escravo.mp4"
+    },
+    {
+      "id": 6,
+      "titulo": "Alfabeto em inglês",
+      "descricao": "Aprenda de uma vez o básico do inglês",
+      "autor": "aprenderinglessemcasa",
+      "visualizacoes": "20 k",
+      "duracao_minutos": 1.00,
+      "tipo_video": "Idiomas",
+      "link_video": "/static/dados_video/videos/alfabeto_ingles.mp4"
+    },
+    {
+      "id": 7,
+      "titulo": "Você não pode ir fazer prova sem saber desse bizu",
+      "descricao": "Agora você vai terminar as provas mais rápido",
+      "autor": "praticandomatematica",
+      "visualizacoes": "20 k",
+      "duracao_minutos": 1.00,
+      "tipo_video": "Matemática",
+      "link_video": "/static/dados_video/videos/bizu_mat.mp4"
+    }
+
+
+  ]
+}

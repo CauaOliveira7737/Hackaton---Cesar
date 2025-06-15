@@ -30,7 +30,9 @@ body {
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    margin-right: -40px;
     padding-right: 60px;
+    transition: transform 0.5s ease;
 }
 
 .demonstrar img {
@@ -52,10 +54,11 @@ body {
 
 .form-area {
     position: absolute;
-    top: 0;
-    right: 0;
+    padding: 30px;
     width: 40%;
-    height: 100%;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -65,21 +68,23 @@ body {
     border-bottom-left-radius: 45px;
     border-top-left-radius: 45px;
     transition: transform 0.5s ease;
+    z-index: 1;
 }
 
 .form-area .form-content {
-    width: 65%;
+    width: 80%;
 }
 
 h1 {
     margin-bottom: 20px;
     color: #333;
+    width: 80%;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: #000000;
     font-size: 12px;
     margin-top: 5px;
 }
@@ -98,6 +103,9 @@ input[type="email"] {
 input:focus {
     border: 1px solid #0047AB;
     outline: none;
+}
+input::placeholder{
+    color: #5555557e;
 }
 
 button {
@@ -121,6 +129,7 @@ button:hover {
     font-size: 13px;
     font-weight: 400;
     margin-top: 10px;
+    
 }
 
 .texto-login a {
@@ -133,7 +142,17 @@ button:hover {
 }
 
 .form-area.mover {
-    transform: translateX(-100%);
+    transform: translateX(-60vw);
+    border-top-right-radius: 45px;
+    border-bottom-right-radius: 45px;
+    z-index: 1;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.397);
+    margin-right: -40px;
+
+}
+.demonstrar.mover2{
+    transform: translateX(40vw);
+    width:60%;
 }
 
 .formulario {
@@ -142,6 +161,8 @@ button:hover {
 
 .formulario.ativo {
     display: block;
+    justify-items: center;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -159,4 +180,9 @@ button:hover {
         border-radius: 0;
         box-shadow: none;
     }
+
+    button {
+        width: 100%;
+    }
+    
 }

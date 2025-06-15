@@ -1,4 +1,3 @@
-
 const menuBtn = document.querySelector('.icon-menu');
 const menuLateral = document.getElementById('menuLateral');
 const fecharBtn = document.getElementById('fecharMenu');
@@ -18,9 +17,6 @@ menuBtn.addEventListener('click', abrirMenu);
 fecharBtn.addEventListener('click', fecharMenu);
 overlay.addEventListener('click', fecharMenu);
 
-
-
-
-
-
-
+document.getElementById('link-salvos').addEventListener('click', function() {
+    window.location.href = '/salvos';
+});
