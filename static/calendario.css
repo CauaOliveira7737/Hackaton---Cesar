@@ -64,6 +64,14 @@ select {
   box-sizing: border-box;
 }
 
+:focus {
+    border: 1px solid #0047AB;
+    outline: none;
+}
+::placeholder{
+    color: #5555557e;
+}
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
