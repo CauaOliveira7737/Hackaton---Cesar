@@ -144,7 +144,7 @@ def editar_perfil():
         usuario.foto = nome_arquivo
 
     db.session.commit()
-    return redirect('/perfil')
+    return jsonify({"mensagem": "Perfil atualizado com sucesso!"})
 
 @app.route('/salvos')
 def ver_salvos():

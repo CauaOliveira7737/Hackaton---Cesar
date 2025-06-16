@@ -305,3 +305,22 @@ body {
   margin: 0 auto 1rem auto;
   border: 2px solid #1f2c5c;
 }
+
+.toast-perfil {
+  display: none;
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: #d1fae5;
+  color: #065f46;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  z-index: 20;
+  transition: opacity 0.3s;
+}
+.toast-perfil.erro {
+  background: #fee2e2;
+  color: #991b1b;
+}

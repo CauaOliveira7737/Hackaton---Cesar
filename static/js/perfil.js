@@ -29,13 +29,27 @@ document.getElementById('form-editar').addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(data => {
         if (data.mensagem) {
-            alert(data.mensagem);
-            location.reload();
+            mostrarToastPerfil(data.mensagem, true);
+            setTimeout(() => {
+                fecharModal();
+                location.reload();
+            }, 1200);
         } else if (data.erro) {
-            alert('Erro: ' + data.erro);
+            mostrarToastPerfil('Erro: ' + data.erro, false);
         }
     })
     .catch(error => {
+        mostrarToastPerfil('Erro ao salvar.', false);
         console.error('Erro:', error);
     });
 });
+
+function mostrarToastPerfil(texto, sucesso = true) {
+    const toast = document.getElementById('toast-perfil');
+    toast.innerText = texto;
+    toast.className = 'toast-perfil' + (sucesso ? '' : ' erro');
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 2000);
+}

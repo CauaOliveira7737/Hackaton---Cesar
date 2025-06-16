@@ -16,10 +16,12 @@
 
     <header>
         <div class="topo">
-            <div class="left-topo">
-                <img class="logo-topo" src="/static/videos/logosemtexto.png">
-                <h1 class="texto-p">Estuda Ai</h1>
-            </div>
+            <a href="/index" class="icone">
+                <div class="left-topo">
+                    <img class="logo-topo" src="/static/videos/logosemtexto.png">
+                    <h1 class="texto-p">Estuda Ai</h1>
+                </div>
+            </a>
             <div class="barra-pesquisa">
                 <i class="fas fa-search procurar-topo"></i>
                 <input class="input-topo" type="text" placeholder="Buscar vídeos educativos...">
@@ -38,7 +40,7 @@
             <div class="perfil-menu">
                 <div class="foto-perfil">
                     <img class="foto-perfil" src="{{ url_for('static', filename='fotos/' + usuario.foto) }}"
-                    alt="Foto de Perfil">
+                        alt="Foto de Perfil">
                 </div>
                 <p class="nome-perfil">{{ usuario.username }}</p>
             </div>

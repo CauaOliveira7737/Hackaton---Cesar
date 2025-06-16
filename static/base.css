@@ -61,6 +61,12 @@ body {
     flex-direction: row;
     align-items: center;
 }
+
+.icone {
+    color: #fff;
+    text-decoration: none;
+}
+
 .logo-topo{
     height: 160px;
     margin-bottom: -30px;

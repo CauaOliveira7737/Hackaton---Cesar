@@ -56,7 +56,7 @@
 <div id="modal-editar" >
   <div class="modal-conteudo">
     <button class="fechar-modal" onclick="fecharModal()">×</button>
-
+    <div id="toast-perfil" class="toast-perfil"></div>
     <form id="form-editar" action="/editar_perfil" method="post" enctype="multipart/form-data">
       <div class="foto-preview" id="fotoPreview" style="background-image: url('/static/img/perfil.jpg')"></div>
 
@@ -73,7 +73,6 @@
     </form>
   </div>
 </div>
-
 {% endblock %}
 {% block extra_scripts %}
 <script src="/static/js/perfil.js"></script>
