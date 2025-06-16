@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // ========================== //
+    // Controle de Vídeo (Play/Pause e Avanço) //
+    // ========================== //
     const videos = document.querySelectorAll("video");
 
     videos.forEach(video => {
@@ -111,6 +114,42 @@ document.addEventListener("DOMContentLoaded", function () {
             if (tempoVideoSpan) {
                 tempoVideoSpan.textContent = `${currentMin}:${currentSec} / ${totalMin}:${totalSec}`;
             }
+        });
+    });
+
+    // ========================== //
+    // Sistema de Favoritar //
+    // ========================== //
+    document.querySelectorAll(".favoritar-video").forEach(botao => {
+        botao.addEventListener("click", function () {
+            const videoId = botao.getAttribute("data-id");
+
+            fetch("/favoritar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ video_id: videoId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "adicionado") {
+                    botao.classList.add("favorito-ativo");
+                    const icone = botao.querySelector("i");
+                    icone.classList.remove("far");
+                    icone.classList.add("fas");
+                } else if (data.status === "removido") {
+                    botao.classList.remove("favorito-ativo");
+                    const icone = botao.querySelector("i");
+                    icone.classList.remove("fas");
+                    icone.classList.add("far");
+                } else {
+                    console.error("Resposta inesperada:", data);
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao enviar favoritar:", error);
+            });
         });
     });
 });

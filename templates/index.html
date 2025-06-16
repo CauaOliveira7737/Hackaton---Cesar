@@ -1,143 +1,59 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Estuda Ai</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/static/index.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-</head>
+{% block title %}Estuda Ai{% endblock %}
 
-<body>
+{% block extra_head %}
+<link rel='stylesheet' type='text/css' media='screen' href='/static/index.css'>
+{% endblock %}
 
-    <header>
-        <div class="topo">
-            <div class="left-topo">
-                <img class="logo-topo" src="/static/videos/logosemtexto.png">
-                <h1 class="texto-p">Estuda Ai</h1>
+{% block content %}
+<div class="nav-reels">
+    <div class="navegacao-reels">
+        <p class="texto-nav">Todos</p>
+    </div>
+    <div class="navegacao-reels">
+        <p class="texto-nav">Matemática</p>
+    </div>
+    <div class="navegacao-reels">
+        <p class="texto-nav">Ciências</p>
+    </div>
+    <div class="navegacao-reels">
+        <p class="texto-nav">Idiomas</p>
+    </div>
+    <div class="navegacao-reels">
+        <p class="texto-nav">História</p>
+    </div>
+    <div class="navegacao-reels">
+        <p class="texto-nav">Tecnologia</p>
+    </div>
+</div>
+<div class="cards-row">
+    {% for video in videos %}
+    <div class="video-card" data-id="{{ video.id }}" data-categoria="{{video.tipo_video}}">
+        <div class="video-thumb">
+            <video controls width="100%">
+                <source src="{{ video.link_video }}" type="video/mp4">
+                Seu navegador não suporta o vídeo.
+            </video>
+            <div class="controles-video">
+                <button class="playPause"><i class="fas fa-play"></i></button>
             </div>
-            <div class="barra-pesquisa">
-                <i class="fas fa-search procurar-topo"></i>
-                <input class="input-topo" type="text" placeholder="Buscar vídeos educativos...">
+            <span class="tempo-video"></span>
+            <span class="categoria-video">{{ video.tipo_video }}</span>
+            <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}" data-id="{{ video.id }}">
+                <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
             </div>
-            <div class="nav-topo">
-                <i class="fas fa-bars icon-menu"></i>
-            </div>
+
         </div>
-    </header>
-    <div class="overlay" id="overlay"></div>
-    <!-- 
-    <div class="menu-lateral" id="menuLateral">
-        <span class="fechar-menu" id="fecharMenu">&times;</span>
-
-        <div class="perfil-menu">
-            <div class="foto-perfil"></div>
-            <p class="nome-perfil">Nome do Usuário</p>
-        </div>
-
-        <ul class="icons-cards">
-            <li class="icons-menu">
-                <a class="nome-menu" href="/index">
-                    <i data-lucide="home"></i> Início
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/calendario">
-                    <i data-lucide="calendar"></i> Cronograma
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/salvos">
-                    <i data-lucide="bookmark"></i> Salvos
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/perfil">
-                    <i data-lucide="user"></i> Perfil
-                </a>
-            </li>
-        </ul>
-
-        <div class="sair-menu">
-            <a href="/logout">
-                <i data-lucide="log-out"></i> Sair
-            </a>
+        <div class="info-video">
+            <p class="titulo-video">{{ video.titulo }}</p>
+            <p class="descricao-video">{{ video.descricao }}</p>
+            <div class="autor-vizu">
+                <p class="autor-video">{{ video.autor }}</p>
+                <p class="vizu-video">{{ video.visualizacoes }}</p>
+            </div>
         </div>
     </div>
-    -->
-
-
-
-    <main>
-        <div class="nav-reels">
-            <div class="navegacao-reels">
-                <p class="texto-nav">Todos</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Matemática</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Ciências</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Idiomas</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">História</p>
-            </div>
-            <div class="navegacao-reels">
-                <p class="texto-nav">Tecnologia</p>
-            </div>
-        </div>
-        <div class="cards-row">
-            {% for video in videos %}
-            <div class="video-card" data-id="{{ video.id }}" data-categoria="{{video.tipo_video}}">
-                <div class="video-thumb">
-                    <video controls width="100%">
-                        <source src="{{ video.link_video }}" type="video/mp4">
-                        Seu navegador não suporta o vídeo.
-                    </video>
-                    <div class="controles-video">
-                        <button class="playPause"><i class="fas fa-play"></i></button>
-                    </div>
-                    <span class="tempo-video"></span>
-                    <span class="categoria-video">{{ video.tipo_video }}</span>
-                    <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}">
-                        <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                    </div>
-                    <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}"
-                        data-id="{{ video.id }}">
-                        <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                    </div>
-
-                </div>
-                <div class="info-video">
-                    <p class="titulo-video">{{ video.titulo }}</p>
-                    <p class="descricao-video">{{ video.descricao }}</p>
-                    <div class="autor-vizu">
-                        <p class="autor-video">{{ video.autor }}</p>
-                        <p class="vizu-video">{{ video.visualizacoes }}</p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-
-    </main>
-    <script src='/static/js/filtrovideos.js'></script>
-    <script src='/static/js/videoplayer.js'></script>
-    <script src='/static/js/menulateral.js'></script>
-    <script src="/static/js/salvos.js"></script>
-   <!-- <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
-    -->
-
-</body>
-
-</html>
+    {% endfor %}
+</div>
+{% endblock %}

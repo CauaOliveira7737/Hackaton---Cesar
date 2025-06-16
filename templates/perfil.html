@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil - Estuda Ai{% endblock %}
+
+{% block extra_head %}
+<link rel='stylesheet' type='text/css' media='screen' href='/static/perfil.css'>
+{% endblock %}
+
+{% block content %}
+<div class="perfil-container">
+    <div class="perfil-topo">
+        <div class="perfil-info">
+            <div class="perfil-foto">
+                {% if usuario.foto %}
+                <img class="foto-perfil-img" src="{{ url_for('static', filename='fotos/' + usuario.foto) }}"
+                    alt="Foto de Perfil">
+
+                {% else %}
+                <div class="perfil-foto"></div> 
+                {% endif %}
+
+            </div>
+            <div class="perfil-texto">
+                <h2>{{ usuario.username }}</h2>
+                <p>{{ usuario.email }}</p>
+            </div>
+        </div>
+        <button class="botao-editar" onclick="abrirModal()">Editar Perfil</button>
+    </div>
+
+    <div class="estatisticas">
+        <div class="card-estatistica">
+            <h3>Tempo de Estudo</h3>
+            <div class="valor">{{ tempo_estudo }}</div>
+            <small>+10% que no mês passado</small>
+        </div>
+
+        <div class="card-estatistica">
+            <h3>Vídeos Concluídos</h3>
+            <div class="valor">{{ usuario.videos_concluidos }}</div>
+            <small>+15 vídeos essa semana</small>
+        </div>
+
+        <div class="card-estatistica">
+            <h3>Conquistas</h3>
+            <div class="valor">{{ usuario.conquistas }}</div>
+            <small>"Mestre da Matemática"</small>
+        </div>
+    </div>
+
+    <div class="atividade-recente">
+        <h3>Atividade Recente</h3>
+        <p class="sem-atividade">Nenhuma atividade recente.</p>
+    </div>
+</div>
+<div id="modal-editar" >
+  <div class="modal-conteudo">
+    <button class="fechar-modal" onclick="fecharModal()">×</button>
+
+    <form id="form-editar" action="/editar_perfil" method="post" enctype="multipart/form-data">
+      <div class="foto-preview" id="fotoPreview" style="background-image: url('/static/img/perfil.jpg')"></div>
+
+      <label for="username">Nome de usuário</label>
+      <input type="text" name="username" id="username" value="{{ usuario.username }}">
+
+      <label for="email">E-mail</label>
+      <input type="email" name="email" id="email" value="{{ usuario.email }}">
+
+      <label for="foto">Foto de Perfil</label>
+      <input type="file" name="foto" id="foto" accept="image/*" onchange="previewFoto(event)">
+
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script src="/static/js/perfil.js"></script>
+{% endblock %}

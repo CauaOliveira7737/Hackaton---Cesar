@@ -1,117 +1,57 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Estuda Ai</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/static/salvos.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+{% block title %}Seus Favoritos - Estuda Ai{% endblock %}
 
-<body>
+{% block extra_head %}
+<link rel='stylesheet' type='text/css' media='screen' href='/static/salvos.css'>
+{% endblock %}
 
-    <header>
-        <div class="topo">
-            <div class="left-topo">
-                <img class="logo-topo" src="/static/videos/logosemtexto.png">
-                <h1 class="texto-p">Estuda Ai</h1>
+{% block content %}
+{% if videos %}
+<h2 class="h2-salvos">Seus Favoritos</h2>
+<p class="p-salvos">{{ videos|length }} vídeos salvos</p>
+<div class="cards-row">
+    {% for video in videos %}
+    <div class="video-card">
+        <div class="video-thumb">
+            <video controls width="100%">
+                <source src="{{ video.link_video }}" type="video/mp4">
+                Seu navegador não suporta o vídeo.
+            </video>
+            <div class="controles-video">
+                <button class="playPause"><i class="fas fa-play"></i></button>
             </div>
-            <div class="barra-pesquisa">
-                <i class="fas fa-search procurar-topo"></i>
-                <input class="input-topo" type="text" placeholder="Buscar vídeos educativos..." id="buscaInput"
-                    autocomplete="off">
+            <span class="tempo-video">{{ video.duracao_minutos }} min</span>
+            <span class="categoria-video">{{ video.tipo_video }}</span>
+            <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}">
+                <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
             </div>
-
-            <div class="nav-topo">
-                <i class="fas fa-bars icon-menu"></i>
+            <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}" data-id="{{ video.id }}">
+                <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
             </div>
         </div>
-    </header>
-    <div class="overlay" id="overlay"></div>
-
-    <div class="menu-lateral" id="menuLateral">
-        <span class="fechar-menu" id="fecharMenu">&times;</span>
-        <ul class="icons-cards">
-            <li class="icons-menu">
-                <a class="nome-menu" href="/index">
-                    <i class="fa fa-home icons_"></i> Início
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/calendario">
-                    <i class="fa fa-calendar icons_"></i> Calendário
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/salvos">
-                    <i class="fa fa-bookmark icons_"></i> Salvos
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/perfil">
-                    <i class="fa fa-user icons_"></i> Perfil
-                </a>
-            </li>
-            <li class="icons-menu">
-                <a href="/logout">
-                    <i class="fa fa-chevron-left icons_"></i> Sair
-                </a>
-            </li>
-        </ul>
+        <div class="info-video">
+            <p class="titulo-video">{{ video.titulo }}</p>
+            <p class="descricao-video">{{ video.descricao }}</p>
+            <div class="autor-vizu">
+                <p class="autor-video">{{ video.autor }}</p>
+                <p class="vizu-video">{{ video.visualizacoes }} visualizações</p>
+            </div>
+        </div>
     </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="sem-video">
+    <div class="circle-sem-video">
+        <i class="fa far fa-bookmark icons-fav"></i>
+    </div>
+    <p class="p-sem-video">Nenhum vídeo encontrado</p>
+    <p>Tente ajustar os filtros de busca ou categoria.</p>
+</div>
+{% endif %}
+{% endblock %}
 
-
-    <main>
-        {% if videos %}
-        <h2 class="h2-salvos">Seus Favoritos</h2>
-        <p class="p-salvos">{{ videos|length }} vídeos salvos</p>
-        <div class="cards-row">
-            {% for video in videos %}
-            <div class="video-card">
-                <div class="video-thumb">
-                    <video controls width="100%">
-                        <source src="{{ video.link_video }}" type="video/mp4">
-                        Seu navegador não suporta o vídeo.
-                    </video>
-                    <div class="controles-video">
-                        <button class="playPause"><i class="fas fa-play"></i></button>
-                    </div>
-                    <span class="tempo-video">{{ video.duracao_minutos }} min</span>
-                    <span class="categoria-video">{{ video.tipo_video }}</span>
-                    <div class="favoritar-video {% if video.favorito %}favorito-ativo{% endif %}"
-                        data-id="{{ video.id }}">
-                        <i class="{% if video.favorito %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                    </div>
-                </div>
-                <div class="info-video">
-                    <p class="titulo-video">{{ video.titulo }}</p>
-                    <p class="descricao-video">{{ video.descricao }}</p>
-                    <div class="autor-vizu">
-                        <p class="autor-video">{{ video.autor }}</p>
-                        <p class="vizu-video">{{ video.visualizacoes }} visualizações</p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        </div>
-        <div class="sem-video">
-            <div class="circle-sem-video">
-                <i class="fa far fa-bookmark icons-fav"></i>
-            </div>
-            <p class="p-sem-video">Nenhum vídeo encontrado</p>
-            <p>Tente ajustar os filtros de busca ou categoria.</p>
-        </div>
-        {% endif %}
-    </main>
-    <script src='/static/js/videoplayer.js'></script>
-    <script src='/static/js/menulateral.js'></script>
-    <script src="/static/js/salvos.js"></script>
-    <script src="/static/js/filtrovideos.js"></script>
-
-</body>
-
-</html>
+{% block extra_scripts %}
+<script src="/static/js/salvos.js"></script>
+{% endblock %}

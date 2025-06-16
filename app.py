@@ -13,6 +13,10 @@ class Usuarios(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    tempo_estudo_minutos = db.Column(db.Integer, default=0)  
+    videos_concluidos = db.Column(db.Integer, default=0)
+    conquistas = db.Column(db.String(255), default='')
+    foto = db.Column(db.String(255), default='')
 
 class Favoritos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,17 +47,21 @@ def index():
     if 'user_id' not in session:
         return redirect('/login')
     
+    user_id = session['user_id']
+    usuario = Usuarios.query.get(user_id)
+
     with open('static/dados_video/arquivo.json', 'r', encoding='utf-8') as f:
         dados = json.load(f)
     
     videos = dados['videos']
-    favoritos_usuario = Favoritos.query.filter_by(user_id=session['user_id']).all()
+    favoritos_usuario = Favoritos.query.filter_by(user_id=user_id).all()
     ids_favoritos = {f.video_id for f in favoritos_usuario}
 
     for video in videos:
         video['favorito'] = video['id'] in ids_favoritos
 
-    return render_template('index.html', videos=videos)
+    return render_template('index.html', videos=videos, usuario=usuario, pagina_atual='index')
+
     
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -90,11 +98,53 @@ def login():
 def calendario():
     if 'user_id' not in session:
         return redirect('/login')
-    return render_template('calendario.html')
+
+    user_id = session['user_id']
+    usuario = Usuarios.query.get(user_id)
+
+    return render_template('calendario.html', usuario=usuario, pagina_atual='calendario')
     
 @app.route('/perfil')
 def perfil():
-    return render_template('perfil.html')
+    if 'user_id' not in session:
+        return redirect('/login')
+    
+    user_id = session['user_id']
+    usuario = Usuarios.query.get(user_id)
+
+    horas = usuario.tempo_estudo_minutos // 60
+    minutos = usuario.tempo_estudo_minutos % 60
+    tempo_estudo_formatado = f"{horas}h {minutos}m"
+
+    return render_template('perfil.html', pagina_atual='perfil', usuario=usuario, tempo_estudo=tempo_estudo_formatado) 
+
+@app.route('/editar_perfil', methods=['POST'])
+def editar_perfil():
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    user_id = session['user_id']
+    usuario = Usuarios.query.get(user_id)
+
+    novo_username = request.form.get('username')
+    novo_email = request.form.get('email')
+    foto = request.files.get('foto')
+
+    if novo_username:
+        usuario.username = novo_username
+    if novo_email:
+        usuario.email = novo_email
+
+    if foto and foto.filename != '':
+        from werkzeug.utils import secure_filename
+        import os
+        nome_arquivo = secure_filename(foto.filename)
+        caminho = os.path.join(app.root_path, 'static', 'fotos', nome_arquivo)
+        foto.save(caminho)
+        usuario.foto = nome_arquivo
+
+    db.session.commit()
+    return redirect('/perfil')
 
 @app.route('/salvos')
 def ver_salvos():
@@ -102,6 +152,7 @@ def ver_salvos():
         return redirect('/login')
 
     user_id = session['user_id']
+    usuario = Usuarios.query.get(user_id)
     busca = request.args.get('q', '').lower().strip()
 
     favoritos = Favoritos.query.filter_by(user_id=user_id).all()
@@ -119,7 +170,7 @@ def ver_salvos():
                 v['favorito'] = True
                 videos_favoritos.append(v)
 
-    return render_template('salvos.html', videos=videos_favoritos, busca=busca)
+    return render_template('salvos.html', videos=videos_favoritos, busca=busca, usuario=usuario, pagina_atual='salvos')
 
 
 # FUNÇÕES -----------------------------------------------------------

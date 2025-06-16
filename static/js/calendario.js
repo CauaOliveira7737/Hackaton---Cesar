@@ -1,9 +1,22 @@
 let atividades = [];
 
 function mostrarFormulario() {
-  const f = document.getElementById('formulario');
-  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+  const modal = document.getElementById('formulario');
+  const overlay = document.getElementById('modal-overlay');
+  const aberto = modal.style.display === 'block';
+  if (aberto) {
+    modal.style.display = 'none';
+    overlay.classList.remove('active');
+  } else {
+    modal.style.display = 'block';
+    overlay.classList.add('active');
+  }
 }
+
+
+document.getElementById('modal-overlay').addEventListener('click', function() {
+  mostrarFormulario();
+});
 
 function mostrarMensagem(texto, sucesso = true) {
   const msg = document.getElementById('mensagem-feedback');
@@ -19,7 +32,7 @@ function mostrarMensagem(texto, sucesso = true) {
 function carregarAtividades() {
   fetch('/atividades').then(res => res.json()).then(data => {
     atividades = data;
-    filtrar('hoje');
+    filtrar('todas');
   });
 }
 
@@ -47,6 +60,7 @@ function adicionarAtividade() {
     .then(() => {
       mostrarMensagem("Atividade salva com sucesso!", true);
       limparFormulario();
+      mostrarFormulario();
       carregarAtividades();
     })
     .catch(() => {
@@ -69,9 +83,10 @@ function limparFormulario() {
 function filtrar(tipo) {
   const hoje = new Date().toISOString().split('T')[0];
   let lista = atividades;
-  if (tipo === 'hoje') lista = atividades.filter(a => a.data === hoje);
-  if (tipo === 'proximas') lista = atividades.filter(a => a.data > hoje);
+  if (tipo === 'hoje') lista = atividades.filter(a => a.data === hoje && !a.concluida);
+  if (tipo === 'proximas') lista = atividades.filter(a => a.data > hoje && !a.concluida);
   if (tipo === 'concluidas') lista = atividades.filter(a => a.concluida);
+  if (tipo === 'todas') lista = atividades.filter(a => !a.concluida);
   renderizar(lista);
   document.querySelectorAll('.abas button').forEach(btn => btn.classList.remove('active'));
   document.getElementById('btn-' + tipo).classList.add('active');
@@ -80,7 +95,13 @@ function filtrar(tipo) {
 function renderizar(lista) {
   const container = document.getElementById('atividades');
   container.innerHTML = '';
-  if (lista.length === 0) return container.innerHTML = '<p>Nenhuma atividade</p>';
+  if (lista.length === 0) {
+    container.className = 'atividades-container';
+    return container.innerHTML = '<p>Nenhuma atividade</p>';
+  }
+  else {
+    container.className = null;
+  }
   lista.forEach(a => {
     const el = document.createElement('div');
     el.className = 'card' + (a.concluida ? ' completed' : '');
@@ -88,9 +109,10 @@ function renderizar(lista) {
       <strong>${a.titulo}</strong> - ${a.data} ${a.hora}<br>
       ${a.descricao || ''}<br>
       ${a.duracao} min<br>
-      ${a.externa ? '📍 ' + a.local : 'Categoria: ' + a.categoria}<br>
+      ${a.externa ? ('📍 ' + a.local + '<br>') : ''}Categoria: ${a.categoria}<br>
+      <br>
       <button onclick="toggle(${a.id})">${a.concluida ? 'Desfazer' : 'Concluir'}</button>
-      <button onclick="remover(${a.id})">Excluir</button>
+      <button class="remover" onclick="remover(${a.id})">Excluir</button>
     `;
     container.appendChild(el);
   });

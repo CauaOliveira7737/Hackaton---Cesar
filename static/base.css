@@ -1,0 +1,276 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.topo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    background-color: #1f2c5c;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 26px;
+}
+.texto-p{
+    font-size: 22px;
+    font-weight: 600;
+}
+.barra-pesquisa {
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-grow: 1;
+    max-width: 500px;
+    min-width: 200px;
+    height: 30px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.procurar-topo {
+    color: #888;
+    margin-right: 8px;
+}
+
+.input-topo {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+}
+
+.nav-topo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.left-topo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo-topo{
+    height: 160px;
+    margin-bottom: -30px;
+    margin-right: -20px;
+    margin-left: -20px;
+
+}
+.navegacao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+}
+.nav-text{
+    padding-left: 8px;
+    font-weight: 300;
+}
+.icon-menu{
+    font-size: 24px;
+    cursor: pointer;
+}
+
+main{
+    padding-left: 20px;
+}
+
+
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #ffffff;
+    color: #000000;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: block;
+    border-left: 1px solid #ddd;
+    display: block;
+}
+
+.menu-lateral.menu-aberto {
+    transform: translateX(0);
+}
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000; 
+}
+
+.overlay.ativa {
+    opacity: 1;
+    pointer-events: auto;
+}
+.topo-menu {
+    background-color: #1f2c5c;
+    padding-top: 20px;
+    position: relative;
+}
+
+.fechar-menu {
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+}
+.fechar-menu:hover {
+    color: #b91c1ca2;
+}
+
+.perfil-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
+    margin-top: 40px;
+    border-bottom: solid #ffffff3b 1px;
+    padding-bottom: 16px;
+}
+
+.foto-perfil {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-bottom: 10px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+.nome-perfil {
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+}
+
+.icons-cards {
+    list-style: none;
+    padding: 0;
+}
+
+.icons-menu {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.icons-menu a {
+    text-decoration: none;
+    color: #333333a1;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: color 0.2s ease;
+}
+
+.icons-menu svg {
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    color: #333333a1;
+    transition: color 0.2s ease;
+}
+
+.icons-menu:hover {
+    background-color: #0047ab1e;
+}
+
+.icons-menu:hover a,
+.icons-menu:hover svg {
+    color: #1f2c5c;
+}
+.icons-menu.ativo {
+    background-color: #0047ab1e;
+}
+.icons-menu.ativo a,
+.icons-menu.ativo svg {
+    color: #1f2c5c;
+}
+.sair-menu {
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    padding: 10px 20px;
+    border-top: solid #88888852 1px;
+    
+}
+.sair-menu:hover {
+    background-color: #e6271209 ;
+}
+
+.sair-menu a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.sair-menu a svg[data-lucide="log-out"]{
+    margin-right: 6px;
+    width: 17px;
+    height: 17px;
+}
+
+.sair-menu a:hover {
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none !important;
+    
+}
+
+.video-indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.video-indicator.left {
+    left: 20px;
+}
+
+.video-indicator.right {
+    right: 20px;
+}
+
+.video-indicator.show {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+}

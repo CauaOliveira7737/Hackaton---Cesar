@@ -3,7 +3,7 @@
   --fg: #111827;
   --muted: #6b7280;
   --card-bg: #ffffff;
-  --accent: #3b82f6;
+  --accent: #1f2c5c;
   --green: #22c55e;
   --red: #ef4444;
   --border: #e5e7eb;
@@ -18,15 +18,17 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 100%;
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
-/*.container h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}*/
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
+}
 
 button {
   background: var(--accent);
@@ -40,10 +42,20 @@ button {
 }
 
 button:hover {
-  background: #2563eb;
+  background: #182142;
 }
 
-input, select {
+button.remover {
+  background: var(--red);
+  color: white;
+}
+
+button.remover:hover {
+  background: #b91c1c;
+}
+
+input,
+select {
   padding: 0.5rem;
   margin-top: 0.25rem;
   border: 1px solid var(--border);
@@ -86,8 +98,16 @@ input, select {
 }
 
 .abas button {
-  background: #e5e7eb;
-  color: #374151;
+  background: rgb(253, 253, 253);
+  border: solid #becee598 1px;
+  color: black;
+  font-size: 12px;
+  font-weight: 590;
+  
+}
+
+.abas button:hover {
+  background-color: rgba(206, 220, 231, 0.589) ;
 }
 
 .abas button.active {
@@ -95,3 +115,161 @@ input, select {
   color: white;
 }
 
+
+#formulario.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1001;
+  transform: translate(-50%, -50%);
+  background: var(--card-bg);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.25);
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-top: 2.5rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fechar-modal {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.5rem;
+}
+
+.fechar-modal:hover {
+  color: #b91c1ca2;
+}
+
+#formulario.modal .fechar-modal {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--muted);
+  cursor: pointer;
+  z-index: 10;
+}
+
+#formulario.modal .row {
+  margin-bottom: 1rem;
+}
+
+#formulario.modal input,
+#formulario.modal select {
+  margin-bottom: 0.5rem;
+}
+
+#formulario.modal button[type="submit"] {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+#formulario.modal label {
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+#formulario.modal input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+#formulario.modal .row {
+  grid-template-columns: 1fr;
+}
+
+#formulario.modal {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+#formulario.modal .fechar-modal:hover {
+  color: var(--red);
+}
+
+#formulario.modal .row {
+  gap: 0.5rem;
+}
+
+#formulario.modal input,
+#formulario.modal select {
+  width: 100%;
+}
+
+#formulario.modal input[type="checkbox"] {
+  width: auto;
+}
+
+#formulario.modal .label-inline {
+  display: flex;
+  align-items: center;
+}
+
+#formulario.modal .label-inline label {
+  margin-bottom: 0;
+}
+
+#formulario.modal .label-inline input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+#formulario.modal .row {
+  margin-bottom: 1rem;
+}
+
+#formulario.modal input[type="text"],
+#formulario.modal input[type="date"],
+#formulario.modal input[type="time"],
+#formulario.modal input[type="number"],
+#formulario.modal select {
+  margin-bottom: 0.5rem;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+}
+
+.modal-overlay.active {
+  display: block;
+}
+
+.atividade-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.atividades-container {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--muted);
+  background-color: #e2e2e2;
+  min-height: 200px;
+  border-radius: 6px;
+}
